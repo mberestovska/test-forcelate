@@ -1,0 +1,103 @@
+* {
+    box-sizing: border-box;
+}
+body {
+  background-color: #c6dbeb;
+  width: 99vw;
+  font-size: 16px;
+}
+h2 {
+    font-weight: normal;
+}
+.cont {
+  width: 90%;
+  margin: 0 auto;
+}
+
+.popUp {
+    width: 95vw;
+    margin: 0 auto;
+    min-height: 100vh;
+    z-index: 5;
+}
+
+#form {
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    width: 60%;
+    margin: 0 auto;
+}
+input {
+    width: 100%;
+}
+.btn-cont {
+    display: flex;
+    flex-flow: row wrap;
+    width: 100%;
+    margin-top: 0.3em;
+}
+button {
+    width: 40%;
+    margin: auto;
+}
+.control {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.control div {
+    margin-right: 0.5em;
+}
+
+.separator {
+    border: 1px solid black;
+    height: 60px;
+    width: 2px;
+}
+.head-line {
+    display: flex;
+    justify-content: space-between;
+}
+
+table {
+  border-collapse: collapse;
+  font-size: 0.8em;
+  width: 100%;
+  margin: 0.5em 0;
+}
+
+th {
+  border: 1px solid #fff;
+  color: #fff;
+  background-color: black;
+  padding: 0.5em;
+}
+
+td {
+  background-color: #fff;
+  padding: 0.5em;
+  border: 1px solid rgb(158, 158, 158);
+  text-align: center;
+}
+
+#btn-play,
+#btn-del,
+#btn-add,
+#btn-clear {
+  cursor: pointer;
+}
+
+@media screen and (max-width: 900px) {
+    .tbl-cont {
+        overflow-x: scroll; 
+    }
+}
+@media screen and (max-width: 550px) {
+    img {
+        width: 80%;
+        height: auto;
+    }
+}
