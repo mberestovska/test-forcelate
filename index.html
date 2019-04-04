@@ -9,123 +9,157 @@
   </head>
 
   <body>
-    <!-- pop-up form-->
-    <div class="popUp">
-      <form id="form">
-        <label for="call">Call Controll</label>
-        <input id="call" />
-        <label for="read">Read</label>
-        <input id="read" />
-        <label for="sound">Sound / Auto Call</label>
-        <input id="sound" />
-        <label for="truck">Truck</label>
-        <input id="truck" />
-        <label for="origin">Origin</label>
-        <input id="origin" />
-        <label for="destination">Destination</label>
-        <input id="destination" />
-        <label for="pickup">Pickup</label>
-        <input id="pickup" />
-        <label for="dh-o">DH-O</label>
-        <input id="dh-o" />
-        <label for="dh-d">DH-D</label>
-        <input id="dh-d" />
-        <label for="fp">F/P</label>
-        <input id="fp" />
-        <label for="length">Length</label>
-        <input id="length" />
-        <label for="weigth">Weight</label>
-        <input id="weight" />
-        <label for="trip">Trip</label>
-        <input id="trip" />
-        <label for="alarm">Alarm</label>
-        <input id="alarm" />
-        <label for="actions">Actions</label>
-        <input id="actions" />
-        <div class="btn-cont">
-          <button type="submit">Submit</button>
-          <button type="reset">Cansel</button>
+    <div id="app">
+      <!-- pop-up form-->
+      <div class="popUp" v-if="isDisplayed">
+        <form id="form" method="POST">
+          <label for="call">Call Control</label>
+          <input id="call" v-model="inputData.callControl" />
+          <label for="read">Read</label>
+          <input id="read" v-model="inputData.read" />
+          <label for="sound">Sound / Auto Call</label>
+          <input id="sound" v-model="inputData.sound" />
+          <label for="truck">Truck</label>
+          <input id="truck" v-model="inputData.truck" />
+          <label for="origin">Origin</label>
+          <input id="origin" v-model="inputData.origin" />
+          <label for="destination">Destination</label>
+          <input id="destination" v-model="inputData.destination" />
+          <label for="pickup">Pickup</label>
+          <input id="pickup" v-model="inputData.pickup" />
+          <label for="dh-o">DH-O</label>
+          <input id="dh-o" v-model="inputData.dhO" />
+          <label for="dh-d">DH-D</label>
+          <input id="dh-d" v-model="inputData.dhD" />
+          <label for="fp">F/P</label>
+          <input id="fp" v-model="inputData.fp" />
+          <label for="length">Length</label>
+          <input id="length" v-model="inputData.myLength" />
+          <label for="weigth">Weight</label>
+          <input id="weight" v-model="inputData.weight" />
+          <label for="trip">Trip</label>
+          <input id="trip" v-model="inputData.trip" />
+          <label for="alarm">Alarm</label>
+          <input id="alarm" v-model="inputData.alarm" />
+          <label for="actions">Actions</label>
+          <input id="actions" v-model="inputData.actions" />
+          <div class="btn-cont">
+            <button type="submit" id="submitButton" @click.prevent="submitForm">
+              Submit
+            </button>
+            <button type="reset">Cansel</button>
+          </div>
+        </form>
+      </div>
+
+      <div class="cont">
+        <h2>Post Trucks</h2>
+
+        <div class="control">
+          <div id="btn-play" @click="displaySecondTable">
+            <img src="play.png" alt="play button" />
+          </div>
+          <div class="separator"></div>
+          <div id="btn-add" @click="displayed">
+            <img src="add.png" alt="add symbol" />
+          </div>
+          <div>New</div>
+          <div id="btn-del" @click="clearFirstTable">
+            <img src="delete.png" alt="delete symbol" />
+          </div>
+          <div>Delete All</div>
+          <div><img src="repost.png" alt="repost symbol" /></div>
+          <div>Repost All</div>
         </div>
-      </form>
-    </div>
 
-    <div class="cont">
-      <h2>Post Trucks</h2>
-      
-      <div class="control">
-        <div id="btn-play"><img src="play.png" alt="play button"></div>
-        <div class="separator"></div>
-        <div id="btn-add"><img src="add.png" alt="add symbol"></div>
-        <div>New</div>
-        <div id="btn-del"><img src="delete.png" alt="delete symbol"></div>
-        <div>Delete All</div>
-        <div><img src="repost.png" alt="repost symbol"></div>
-        <div>Repost All</div>
-      </div>
-      
-      <div class="tbl-cont">
-      <table id="table1">
-        <thead>
-          <tr>
-            <th>Call Controll</th>
-            <th>Read</th>
-            <th>Sound / Auto Call</th>
-            <th>Truck</th>
-            <th>Origin</th>
-            <th>Destination</th>
-            <th>Pickup</th>
-            <th>DH-O</th>
-            <th>DH-D</th>
-            <th>F/P</th>
-            <th>Length</th>
-            <th>Weight</th>
-            <th>Trip</th>
-            <th>Alarm</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-      </table>
-    </div>
+        <div class="tbl-cont">
+          <table id="table1">
+            <thead>
+              <tr>
+                <th>Call Control</th>
+                <th>Read</th>
+                <th>Sound / Auto Call</th>
+                <th>Truck</th>
+                <th>Origin</th>
+                <th>Destination</th>
+                <th>Pickup</th>
+                <th>DH-O</th>
+                <th>DH-D</th>
+                <th>F/P</th>
+                <th>Length</th>
+                <th>Weight</th>
+                <th>Trip</th>
+                <th>Alarm</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody v-if="isSubmited">
+              <tr>
+                <td>{{ inputData.callControl }}</td>
+                <td>{{ inputData.read }}</td>
+                <td>{{ inputData.sound }}</td>
+                <td>{{ inputData.truck }}</td>
+                <td>{{ inputData.origin }}</td>
+                <td>{{ inputData.destination }}</td>
+                <td>{{ inputData.pickup }}</td>
+                <td>{{ inputData.dhO }}</td>
+                <td>{{ inputData.dhD }}</td>
+                <td>{{ inputData.fp }}</td>
+                <td>{{ inputData.myLength }}</td>
+                <td>{{ inputData.weigth }}</td>
+                <td>{{ inputData.trip }}</td>
+                <td>{{ inputData.alarm }}</td>
+                <td>{{ inputData.actions }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
 
-      
-      <div class="head-line">
-      <h2>Search results: Total : <span id="numberOfRows"></span></h2>
-      <div class="control">
-        <div><img src="undo.png" alt="undo symbol"></div>
-        <div>Undo</div>
-        <div id="btn-clear"><img src="clear.png" alt="clear symbol"></div>
-        <div>Clear</div>
-      </div>
-    </div>
+        <div class="head-line">
+          <h2>Search results: Total : <span id="numberOfRows"></span></h2>
+          <div class="control">
+            <div><img src="undo.png" alt="undo symbol" /></div>
+            <div>Undo</div>
+            <div id="btn-clear" @click="clearSecondTable">
+              <img src="clear.png" alt="clear symbol" />
+            </div>
+            <div>Clear</div>
+          </div>
+        </div>
 
-    <div class="tbl-cont">
-      <table id="table2">
-        <thead>
-          <tr>
-            <th>Rate</th>
-            <th>F</th>
-            <th>Source</th>
-            <th>Age</th>
-            <th>Avail</th>
-            <th>Truck</th>
-            <th>Truck-O</th>
-            <th>DH-O</th>
-            <th>F/P</th>
-            <th>Origin</th>
-            <th>Trip</th>
-            <th>Destination</th>
-            <th>DH-D</th>
-            <th>Truck-D</th>
-            <th>Length</th>
-            <th>Weight</th>
-            <th>Company</th>
-            <th>Phone</th>
-          </tr>
-        </thead>
-      </table>
+        <div class="tbl-cont">
+          <table id="table2">
+            <thead>
+              <tr>
+                <th>Rate</th>
+                <th>F</th>
+                <th>Source</th>
+                <th>Age</th>
+                <th>Avail</th>
+                <th>Truck</th>
+                <th>Truck-O</th>
+                <th>DH-O</th>
+                <th>F/P</th>
+                <th>Origin</th>
+                <th>Trip</th>
+                <th>Destination</th>
+                <th>DH-D</th>
+                <th>Truck-D</th>
+                <th>Length</th>
+                <th>Weight</th>
+                <th>Company</th>
+                <th>Phone</th>
+              </tr>
+            </thead>
+            <tbody id="tablePart"></tbody>
+          </table>
+        </div>
       </div>
     </div>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="script.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+ <!-- <script src="script.js"></script>  this is old version on JS-->
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+   <script src="trainingVue.js"></script>
+   
   </body>
 </html>

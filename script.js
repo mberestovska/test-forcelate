@@ -139,6 +139,8 @@ var arrRate,
   arrCompany,
   arrPhone;
 
+var isSecondTableDisplayed = false;
+
 //arrRate = Math.floor(Math.random() * 10000); // to get 4 digits number
 arrF = ["yes", "no"];
 // var elArrF = Math.floor(Math.random()*2);//to have whether 0 or 1;
@@ -229,10 +231,12 @@ function createTableRow() {
 }
 // for pay button
 $("#btn-play").on("click", ev => {
+  isSecondTableDisplayed = true;
      displaySecondTable();
 });
 
 function displaySecondTable() {
+  if(isSecondTableDisplayed){
   var numberOfRows = Math.floor(Math.random() * (10 - 5 + 1)) + 5;
   console.log(numberOfRows);
   $("#numberOfRows").text(numberOfRows);
@@ -245,8 +249,10 @@ function displaySecondTable() {
   // change the table every 10 sec
   setInterval(displaySecondTable, 10000);
 }
+}
 
 // delete data from the second table
 $('#btn-clear').on('click', ev => {
     $("#table2 tbody").remove();
+    isSecondTableDisplayed = false;
 });
