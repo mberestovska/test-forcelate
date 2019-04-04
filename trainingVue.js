@@ -70,7 +70,6 @@ var vm = new Vue({
   },
   methods: {
     displayed: function() {
-      alert("displaying!");
       this.isDisplayed = true;
     },
     submitForm: function() {
