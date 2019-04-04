@@ -227,6 +227,9 @@ var vm = new Vue({
       var elements = this.tableData.length;
       document.getElementById("table1").innerHTML +=
       this.tableData[elements - 1];
+    },
+    canselButton: function(){
+      this.isDisplayed = false;
     }
   }
 });
